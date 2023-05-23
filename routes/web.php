@@ -22,8 +22,9 @@ Route::get('/', function () {
 })->name('index');
 
 ////
-Route::get('/afiliados/general/cod={cod}/{nom_persona}',[PersonaController::class, 'showAfiliado'])->name('show');
+Route::get('/afiliados/general/cod={cod}/{nom}',[PersonaController::class, 'showAfiliado'])->name('show');
 Route::get('/afiliados/general',[PersonaController::class, 'general'])->name('general');
+Route::get('/afiliados/general/nuevo-afiliado',[PersonaController::class, 'create'])->name('create');
 
 Route::post('/find',[PersonaController::class, 'find'])->name('find');
 Route::post('/findByDNI',[PersonaController::class, 'findByDNI'])->name('find.DNI');

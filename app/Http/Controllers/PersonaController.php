@@ -46,37 +46,13 @@ class PersonaController extends Controller
          }           
          //return redirect('/afiliados/general/{persona}')->with(['persona'=> $persona]);
          return view('general.generalShow',['persona'=>$persona,]);      
-      }
-      //Si ninguna variable fue creada retornamos al controlador general sin variables        
-      //return redirect('/afiliados/general/{persona}');
-      return view('general.generalShow');
-      
-      // return view('general.generalShow');
-
-      //Comprobamos que variables nos han llegado de los metodos de mas abajo para saber que variables pasar a la vista
-      // if(null !== session('persona'))
-      // {
-      //    $persona = session('persona');
-
-      //    if (null !== session('padre')) 
-      //    {
-      //       $padre = session('padre');
-
-      //       if (null !== session('madre')) {
-      //          $madre = session('madre');
-      //          return view('general.generalShow',['persona'=>$persona, 'padre' => $padre, 'madre' => $madre]);
-      //       }
-
-      //       return view('general.generalShow',['persona'=>$persona, 'padre' => $padre]);
-      //    }
-
-      //    return view('general.generalShow',['persona'=>$persona,]);
-      // }
-      
-      // return view('general.generalShow');
+      }     
    }
 
-
+   public function create()
+   {
+      return view('general.generalShow');
+   }
 
    public function general()
    {
@@ -93,7 +69,7 @@ class PersonaController extends Controller
    {  
       $nom = Str::slug($request->nom);
       //dd($nom);
-      return redirect()->route('show', ['cod'=> $request->cod, 'nom_persona'=>$nom]);
+      return redirect()->route('show', ['cod'=> $request->cod, 'nom'=>$nom]);
       // $request->validate(
          
       //    [
@@ -173,7 +149,7 @@ class PersonaController extends Controller
          'nombre'=>'required|max:30',
          'fnaci'=>'required',
          'NFot_Personas'=>'nullable',
-         'dni'=>['required','alpha_num:ascii',Rule::unique('personas','Dni_Personas')->ignore($request->codigo,'Cod_Personas')],
+         'dni'=>['required','alpha_num:ascii',Rule::unique('personas','Dni_Personas')],
          'domicilio'=>'required',
          'cpostal'=>'required|numeric',
          'poblacion'=>'required',
@@ -350,23 +326,9 @@ class PersonaController extends Controller
          'Lopd_Personas' =>  $request->lopd  
       ]);
 
-      //Al igual que con los padres verificamos que array no venga vacio y asginamos la variable persona al primer objeto del array
       $persona = Persona::where('Dni_Personas', $request->dni)->get();
-      $persona = $persona[0];
-      
-      //dd('persona encontrada  '. $persona);
-
-      //Comprobamos que variables se han creado para redirigir a la funcion index con una o mas variables 
-      if(isset($padre->Cod_Padres)){
-         if (isset($madre->Cod_Padres)) {
-            //dd('return con todos  '. $persona . $padre . $madre);
-            return redirect('show.persona')->with(['persona'=> $persona, 'padre' => $padre, 'madre' =>$madre]);
-         }
-         //dd('return con per pad  '. $persona . $padre );
-         return redirect('show.persona')->with(['persona'=> $persona, 'padre' => $padre]);
-      }
-      //dd('return con perona  '. $persona);
-      return redirect('show.persona')->with('persona', $persona);     
+      $nom = $request->nombre . '-' . $request->apellidos;
+      return redirect()->route('show',['cod'=>$persona[0]->Cod_Personas, 'nom'=>$nom]);    
    }
 
 
@@ -398,7 +360,7 @@ class PersonaController extends Controller
             'lopd'=>'nullable',           
          ]         
       );
-
+      
       if ($request->nomPadre||$request->dniPadre) 
       {
          $request->validate(         
@@ -580,7 +542,7 @@ class PersonaController extends Controller
       //    return redirect('show.persona')->with('persona', $persona);
       // }
       $nom = $request->nombre . '-' . $request->apellidos;
-      return redirect()->route('show.persona',['cod'=>$request->codigo, 'nom'=>$nom]);
+      return redirect()->route('show',['cod'=>$request->codigo, 'nom'=>$nom]);
    }
 
 

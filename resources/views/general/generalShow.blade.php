@@ -1,13 +1,10 @@
 @extends('layouts.app')
-@push('jquery')
-<script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
-@endpush
 
 @section('titulo')
 - Afiliados @if (isset($persona->Cod_Personas))- {{$persona->Nomb_Personas}} {{$persona->Apel_Personas}} @endif
 @endsection        
 @section('contenido')
-        <div class="w-5/6 p-3 pt-5 flex flex-col gap-y-1 bg-gray-300">
+        <div class=" p-3 pt-5 flex flex-col gap-y-1 bg-gray-300">
             <div class="text-2xl flex items-center justify-center font-bold text-gray-700">
                 General
             </div>
@@ -23,8 +20,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>                              
                         </button>                           
-                    </div>                  
-    
+                    </div>                    
+                       
+
+                    </script>
                     <!-- ELIMINAR -->
                     <div>
                         <!-- boton -->
@@ -77,7 +76,7 @@
                 @enderror                 
 
             </div>
-            <form id="afilForm" action="{{route('update')}}" method="post">
+            <form id="afilForm" action="{{route('store')}}" method="post">
                 @csrf
                 <div class="relative flex p-3 pl-6 shadow-inner bg-gray-100 rounded">
 
@@ -93,8 +92,8 @@
                                 
                                 <div class="flex flex-col mt-2 items-end gap-2">
                                     <input type="text" name="codigo" id="codigo" class="w-16 border-2 rounded p-0 border-stone-500 text-right " value="@isset($persona){{$persona->Cod_Personas}}@endisset{{old('codigo')}}" disabled="true">
-                                    <input type="text" name="apellidos" id="apellidos" class="w-52 border-2 rounded p-0 border-stone-500 text-right " value="@isset($persona){{$persona->Apel_Personas}}@endisset{{old('apellidos')}}" disabled="true">
-                                    <input type="text" name="nombre" id="nombre" class="justify-self-end w-52 border-2 rounded p-0 border-stone-500 text-right " value="@isset($persona){{$persona->Nomb_Personas}}@endisset{{old('nombre')}}" disabled="true" >
+                                    <input type="text" name="apellidos" id="apellidos" class="w-52 border-2 rounded p-0 border-stone-500 text-right " value="@isset($persona){{$persona->Apel_Personas}}@endisset{{old('apellidos')}}" @if(isset($persona)) disabled="true" @endif>
+                                    <input type="text" name="nombre" id="nombre" class="justify-self-end w-52 border-2 rounded p-0 border-stone-500 text-right " value="@isset($persona){{$persona->Nomb_Personas}}@endisset{{old('nombre')}}" @if(isset($persona)) disabled="true" @endif >
                                 </div>
                             </div>
 
@@ -118,17 +117,17 @@
                             
                         </div>     
                             <div class="gap-2">
-                                <input type="checkbox" name="lopd" id="lopd" class="border-2 rounded p-0 border-stone-500" @isset($persona)@if($persona->Lopd_Personas != null) checked @endif @endisset @checked(old('lopd')) disabled="true">
+                                <input type="checkbox" name="lopd" id="lopd" class="border-2 rounded p-0 border-stone-500" @isset($persona)@if($persona->Lopd_Personas != null) checked @endif @endisset @checked(old('lopd')) @if(isset($persona)) disabled="true" @endif>
                                 <label for="lopd">Ha firmado la hoja de consentimiento de la LOPD</label>                        
                             </div> 
                         
                     </div>
                     <div class="absolute right-44 2xl:ml-44">
                         <div>
-                            <img class="h-28" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else profile/usuario.svg @endif " alt="Imagen Persona">
+                            <img class="h-28" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
                         </div>
                         <div class="mt-1">
-                            <button id="fotoCamb" class="border rounded p-1 px-2 font-medium bg-gray-300 hover:bg-gray-400" hidden>Cambiar foto</button>
+                            <button id="fotoCamb" class="border rounded p-1 px-2 font-medium bg-gray-300 hover:bg-gray-400" @if(isset($persona)) hidden @endif>Cambiar foto</button>
                         </div>      
                         
                     </div>
@@ -146,14 +145,14 @@
                             </div>
                             
                             <div class="flex flex-col items-end gap-y-2">
-                                <input type="date" name="fnaci" id="fnaci" class="w-32 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->FNac_Personas}}@endisset{{old('fnaci')}}" disabled="true">
-                                <input type="text" name="dni" id="dni" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Dni_Personas}}@endisset{{old('dni')}}" disabled="true">
+                                <input type="date" name="fnaci" id="fnaci" class="w-32 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->FNac_Personas}}@endisset{{old('fnaci')}}" @if(isset($persona)) disabled="true" @endif>
+                                <input type="text" name="dni" id="dni" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Dni_Personas}}@endisset{{old('dni')}}" @if(isset($persona)) disabled="true" @endif>
                                 <div class="">
-                                    <input type="text" name="telf" id="telf" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Tfn1_Personas}}@endisset{{old('telf')}}" disabled="true">
+                                    <input type="text" name="telf" id="telf" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Tfn1_Personas}}@endisset{{old('telf')}}" @if(isset($persona)) disabled="true" @endif>
                                     -
-                                    <input type="text" name="telf2" id="telf2" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Tfn2_Personas}}@endisset{{old('telf2')}}" disabled="true">
+                                    <input type="text" name="telf2" id="telf2" class="w-24 border-2 rounded p-0 border-stone-500 text-right"value="@isset($persona){{$persona->Tfn2_Personas}}@endisset{{old('telf2')}}" @if(isset($persona)) disabled="true" @endif>
                                 </div>    
-                                <input type="text" name="email" id="email"  class="w-80 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Emai_Personas}}@endisset{{old('email')}}" disabled="true">
+                                <input type="text" name="email" id="email"  class="w-80 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Emai_Personas}}@endisset{{old('email')}}" @if(isset($persona)) disabled="true" @endif>
                             </div>
                         </div>
                         
@@ -194,12 +193,12 @@
                             </div>
                             
                             <div class="flex flex-col gap-y-2 items-end">
-                                <input type="text" name="domicilio" id="domi" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Domi_Personas}}@endisset{{old('domicilio')}}" disabled="true">
-                                <input type="text" name="provincia" id="prov" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Prov_Personas}}@endisset{{old('provincia')}}" disabled="true">
+                                <input type="text" name="domicilio" id="domi" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Domi_Personas}}@endisset{{old('domicilio')}}" @if(isset($persona)) disabled="true" @endif>
+                                <input type="text" name="provincia" id="prov" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Prov_Personas}}@endisset{{old('provincia')}}" @if(isset($persona)) disabled="true" @endif>
                                 <div>                        
-                                    <input type="text" name="cpostal" id="cpos" class="w-14 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->CPos_Personas}}@endisset{{old('cpostal')}}" disabled="true">
+                                    <input type="text" name="cpostal" id="cpos" class="w-14 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->CPos_Personas}}@endisset{{old('cpostal')}}" @if(isset($persona)) disabled="true" @endif>
                                     -
-                                    <input type="text" name="poblacion" id="pobl" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Pobl_Personas}}@endisset{{old('poblacion')}}" disabled="true">
+                                    <input type="text" name="poblacion" id="pobl" class="w-52 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->Pobl_Personas}}@endisset{{old('poblacion')}}" @if(isset($persona)) disabled="true" @endif>
                                 </div>
                             </div>
                         </div>
@@ -233,12 +232,12 @@
                         <div class="flex flex-col gap-y-3">
                             <div class="flex gap-52">
                                 <label for="falta">Fecha Alta:</label>
-                                <input type="date" name="falta" id="falta" class="w-32 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->FAlt_Personas}}@endisset{{old('falta')}}" disabled="true">
+                                <input type="date" name="falta" id="falta" class="w-32 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->FAlt_Personas}}@endisset{{old('falta')}}" @if(isset($persona)) disabled="true" @endif>
                             </div>
                             
                             <div class="flex gap-56">
                                 <label for="grupo-fam">Grupo Fam:</label>                    
-                                <select name="grupoFam" id="grupoFam" class="ml-1" disabled="true">
+                                <select name="grupoFam" id="grupoFam" class="ml-1" @if(isset($persona)) disabled="true" @endif>
                                     <option value="">seleccion 1</option>
                                     <option value="">seleccion 2</option> 
                                     <option value="">seleccion 3</option> 
@@ -280,11 +279,12 @@
                                     
                                     <!-- EDITAR PADRE-->
                                     <div>                                        
-                                        <button id="editPadre" data-modal-target="padre-modal" data-modal-toggle="padre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button" hidden>
+                                        <button id="editPadre" data-modal-target="padre-modal" data-modal-toggle="padre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button" @if(isset($persona))hidden @endif>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>                                              
                                         </button>
+                                    <!-- MOSTRAR PADRE -->
                                         <button id="showPadre" data-modal-target="padre-modal" data-modal-toggle="padre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -385,11 +385,12 @@
                                     
                                     <!-- EDITAR MADRE -->
                                     <div>                                       
-                                        <button id="editMadre" data-modal-target="madre-modal" data-modal-toggle="madre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button" hidden>
+                                        <button id="editMadre" data-modal-target="madre-modal" data-modal-toggle="madre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button" @if(isset($persona))hidden @endif>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>                                              
                                         </button>
+                                        <!-- MOSTRAR MADRE -->
                                         <button id="showMadre" data-modal-target="madre-modal" data-modal-toggle="madre-modal" class="border rounded p-1 font-medium bg-gray-300 hover:bg-gray-400" type="button">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -490,19 +491,21 @@
                     </div>             
                     
                     <div>
-                        <input type="checkbox" name="desc" id="desc" class="border-2 p-0 border-stone-500" @isset($personas)@if($persona->Desc_Personas != null) checked @endif @endisset @checked(old('lopd')) disabled="true"> 
+                        <input type="checkbox" name="desc" id="desc" class="border-2 p-0 border-stone-500" @isset($persona)@if($persona->Desc_Personas != null) checked @endif @endisset @checked(old('desc')) @if(isset($persona))disabled="true"@endif> 
                         <label for="desc">Descatalogado</label>                     
                     </div>
                     <div>
                         <label for="fdesc">Fecha Descatalogado:</label>
-                        <input type="date" name="fdesc" id="fdesc" class="w-32 border-2 rounded p-0 border-stone-500 text-right ml-32" value="@isset($persona){{$persona->FDes_Personas}}@endisset{{old('fdesc')}}" disabled="true">    
+                        <input type="date" name="fdesc" id="fdesc" class="w-32 border-2 rounded p-0 border-stone-500 text-right ml-32" value="@isset($persona){{$persona->FDes_Personas}}@endisset{{old('fdesc')}}" @if(isset($persona))disabled="true"@endif>    
                     </div>
                     <div class="flex flex-col gap-y-2">
                         <label for="mdesc">Motivo Descatalogado:</label>                   
-                        <textarea name="mdesc" id="mdesc" cols="5" rows="5" class="w-96 rounded" disabled="true">@isset($persona){{$persona->MBaj_Personas}}@endisset{{old('mdesc')}}</textarea>   
+                        <textarea name="mdesc" id="mdesc" cols="5" rows="5" class="w-96 rounded" @if (isset($persona))disabled="true"     
+                        @endif>@isset($persona){{$persona->MBaj_Personas}}@endisset{{old('mdesc')}}</textarea>   
                     </div>
                     <div class="mt-2 ">
-                        <button class="border rounded p-1 px-2 shadow bg-gray-300 hover:bg-gray-400 font-medium" type="submit" name="nuevoUsu" id="nuevoUsu" >Crear Afiliado</button>
+                        <button class="border rounded p-1 px-2 shadow bg-gray-300 hover:bg-gray-400 font-medium" type="submit" name="nuevoUsu" id="nuevoUsu" @if (isset($persona))hidden      
+                        @endif>Crear Afiliado</button>
                     </div>    
                 </div>
             </form>
@@ -511,4 +514,5 @@
     <script type="text/javascript">
         var message = @if (isset($message))$message @endif;        
     </script>
+    
 @endsection

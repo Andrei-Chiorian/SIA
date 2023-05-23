@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="content-type" content="utf-8">
-    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+    <meta http-equiv="content-type" content="utf-8">    
+    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>    
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
     @stack('jquery')         
@@ -31,7 +31,7 @@
         </div>
     </header>
 
-    <main class="container mx-auto">
+    <main>
         <div class="flex">
             <div class="w-1/6 p-1 bg-gray-900">
                 <nav class="flex flex-col gap-y-1 pt-4">
@@ -68,17 +68,18 @@
                         Temporadas
                     </a>               
                 </nav>
-            </div>     
+            </div>
+            <div class="w-full">  
             @yield('contenido')
+            </div>   
         </div>
+        
     </main>
 
     <footer class="text-center p-2 text-white font-bold uppercase  bg-black">
         SIA - Todos los derechos reservados {{now()->year}}       
     </footer>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-    <script src="resources/js/app.js" type="text/javascript"></script>
-        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>        
 </body>
 </html>

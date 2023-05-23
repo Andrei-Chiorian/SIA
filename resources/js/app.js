@@ -8,23 +8,25 @@ window.addEventListener('load', ini, false);
     }, 4000);    
 };
 
-
-document.getElementById('nuevo').addEventListener('click',function e() {
-    enabDisab();
-    enablDisabPadres(); 
-    clearInp();
-    document.getElementById('afilForm').action = "http://localhost:8000/store";
-    document.getElementById('nuevoUsu').innerHTML = "Crear afiliado";   
-});
-
-document.readyState.getElementById('modificar').addEventListener('click',function e() {
-    alert('hola');
+document.getElementById('modificar').addEventListener('click',function e() {
+    
     enabDisab();
     enablDisabPadres(); 
     document.getElementById('afilForm').action = "http://localhost:8000/update";
     //document.getElementById('afilForm').append = "@method('DELETE')";
     document.getElementById('nuevoUsu').innerHTML = "Modificar afiliado";   
 });
+
+
+// document.getElementById('nuevo').addEventListener('click',function e() {
+//     enabDisab();
+//     enablDisabPadres(); 
+//     clearInp();
+//     document.getElementById('afilForm').action = "http://localhost:8000/store";
+//     document.getElementById('nuevoUsu').innerHTML = "Crear afiliado";   
+// });
+
+
 
 document.getElementById('nuevoUsu').addEventListener('click',function e() {
     document.getElementById('codigo').disabled = false;
