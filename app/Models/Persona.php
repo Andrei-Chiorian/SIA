@@ -45,4 +45,9 @@ class Persona extends Model
     {
         return $this->hasOne(Padre_1::class, 'Cod_Padres', 'CMad_Personas');
     }
+
+    public function socio()
+    {
+        return $this->hasMany(Socio::class, 'CPer_Socios');
+    }
 }

@@ -12,7 +12,7 @@ document.getElementById('modificar').addEventListener('click',function e() {
     
     enabDisab();
     enablDisabPadres(); 
-    document.getElementById('afilForm').action = "http://localhost:8000/update";
+    document.getElementById('afilForm').action = "http://localhost:8000/update/persona";
     //document.getElementById('afilForm').append = "@method('DELETE')";
     document.getElementById('nuevoUsu').innerHTML = "Modificar afiliado";   
 });

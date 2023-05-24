@@ -1,10 +1,13 @@
 @extends('layouts.app')
-
+@push('js')
+    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+    @vite('resources/js/app.js')
+@endpush
 @section('titulo')
 - Afiliados @if (isset($persona->Cod_Personas))- {{$persona->Nomb_Personas}} {{$persona->Apel_Personas}} @endif
 @endsection        
 @section('contenido')
-        <div class=" p-3 pt-5 flex flex-col gap-y-1 bg-gray-300">
+        <div class=" p-3 pt-5 flex flex-col gap-y-1 bg-gray-300 rounded">
             <div class="text-2xl flex items-center justify-center font-bold text-gray-700">
                 General
             </div>

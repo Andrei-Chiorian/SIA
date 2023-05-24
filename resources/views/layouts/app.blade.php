@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="content-type" content="utf-8">    
-    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>    
-    @vite('resources/js/app.js')
-    @vite('resources/css/app.css')
-    @stack('jquery')         
+    @stack('js')    
+    @vite('resources/css/app.css')           
     <title>SIA @yield('titulo')</title>
 </head>
 
-<body class="bg-black">
+<body class="bg-gray-900">
     <header>
-        <div class="flex  bg-black">
-            <div class="text-4xl font-black w-1/6 p-2 text-center text-white">
+        <div class="flex  bg-gray-900">
+            <div class="text-5xl font-black w-1/6 p-2 text-center text-white">
                 <h1><a href="{{route('index')}}">SIA</a></h1>
             </div>
             <div class="w-4/6">
@@ -44,7 +42,7 @@
                                 <a href="{{route('general')}}" class="block px-4 py-2 hover:bg-gray-200">General</a>
                             </li>
                             <li class="border border-black rounded bg-zinc-100">
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-200">Socio</a>
+                                <a href="{{route('socios')}}" class="block px-4 py-2 hover:bg-gray-200">Socio</a>
                             </li>
                             <li class="border border-black rounded bg-zinc-100">
                                 <a href="#" class="block px-4 py-2 hover:bg-gray-200">Deportista</a>

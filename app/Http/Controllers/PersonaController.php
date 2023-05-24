@@ -68,54 +68,10 @@ class PersonaController extends Controller
    public function find(Request $request)
    {  
       $nom = Str::slug($request->nom);
-      //dd($nom);
+      
       return redirect()->route('show', ['cod'=> $request->cod, 'nom'=>$nom]);
-      // $request->validate(
-         
-      //    [
-      //       'cod_persona' => 'nullable|exists:personas,Cod_Personas',
-      //       'dni_persona' => 'nullable|exists:personas,Dni_Personas'
-      //    ],
-      //    [
-      //       'cod_persona.exists' => 'Afiliado con codigo ' . $request->cod_persona . ' no existe',
-      //       'dni_persona.exists' => 'Afiliado con DNI ' . $request->dni_persona . ' no existe'
-      //    ]
       
-      // );
-      
-      // $persona = Persona::where('Cod_Personas', $request->cod_persona)->orwhere('Dni_Personas', $request->dni_persona)->get();
-
-      // //Verificamos que el array no viene vacio y si no viene le asignamos el primer objeto del array
-      // if(count($persona)){
-      //    $persona = $persona[0];
-
-      //    //al tener la persona buscamos sus padres
-      //    $padre = Padre::where('Cod_Padres', $persona->CPad_Personas)->get();
-      //    $madre = Padre_1::where('Cod_Padres', $persona->CMad_Personas)->get();
-
-      //    //lo mismo que con la persona
-      //    if(count($padre)){
-      //       $padre = $padre[0];
-      //    }
-      //    if(count($madre)){
-      //       $madre = $madre[0];
-      //    }
-      //   //dd($padre);
-      //    //Comprobamos que variables se han creado para redirigir a la funcion index con una o mas variables 
-      //    if(isset($padre->Cod_Padres)){
-      //       if (isset($madre->Cod_Padres)) {
-                          
-      //          return redirect()->route('show', ['persona'=> $persona, 'padre' => $padre, 'madre' =>$madre]);
-      //       }
-      //       //return redirect('/afiliados/general/{persona}')->with(['persona'=> $persona, 'padre' => $padre]);
-      //       return redirect()->route('show', ['persona'=> $persona, 'padre' => $padre]);
-      //    }           
-      //    //return redirect('/afiliados/general/{persona}')->with(['persona'=> $persona]);
-      //    return redirect()->route('show', ['persona'=> $persona]);         
-      // }
-      // //Si ninguna variable fue creada retornamos al controlador general sin variables        
-      // //return redirect('/afiliados/general/{persona}');
-      // return redirect()->route('show',);
+     
    }
 
 
@@ -268,25 +224,7 @@ class PersonaController extends Controller
             $madre = $madre[0];            
          }
       }
-
-      //dd('madre encontrada  '. $madre);
-
-      // //Encaso de que hayamos creado un padre/madre nuevo creamos un objeto del mismo mendiante una consulta verificando si la request traia un padre o madre mendiate el dni si lo trae hacemos la consulta despues al venir en un array de objetos verificamos si el array esta vacio y si no lo esta asiganmos la variable padre al primer objeto del array
-      // if ($request->dniPadre) {
-      //    $padre = Padre::where('Dni_Padres', $request->dniPadre)->get();
-      //    if (count($padre)) {
-      //       $padre = $padre[0];
-      //    }
-      // }
-
-      // if ($request->dniMadre) {
-      //    $madre = Padre_1::where('Dni_Padres', $request->dniMadre)->get();
-      //    if (count($madre)) {
-      //       $madre = $madre[0];
-      //    }
-      // }
-
-      //Verificamos si el objeto padre se recupero correctramente en tal caso creamos la variable padreInsert y madreInsert para usarla en el update de persona para asignar el nuevo padre al campo CPad_Personas o CMad_Personas si no se ha creado es que la persona no tiene padres introducidos con lo cual lo establecemos en null 
+      
       if (isset($padre->Cod_Padres)) {
          $padreInsert = $padre->Cod_Padres;
       }else{

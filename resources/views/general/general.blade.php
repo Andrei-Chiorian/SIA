@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('jquery')
 <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+@vite('resources/js/app.js')
 @endpush
 
 @section('titulo')
@@ -97,7 +98,7 @@
                     <input type="text" class="w-52 bg-transparent cursor-pointer" name="nom" id="nom" value="{{$persona->Nomb_Personas}} {{$persona->Apel_Personas}}" hidden>
                     
                         <button class="flex bg-gray-200 px-1 gap-3 w-full hover:border hover:bg-white hover:border-black" type="submit">
-                            <div class="w-10">
+                            <div class="w-10 text-blue-800 font-semibold">
                                 {{$persona->Cod_Personas}}                    
                             </div>
                             <div class="w-52 text-left">
