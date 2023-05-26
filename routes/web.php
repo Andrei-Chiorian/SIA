@@ -45,6 +45,8 @@ Route::post('/find/socio',[SocioController::class, 'find'])->name('find.socio');
 
 Route::delete('/delete/socio',[SocioController::class, 'destroy'])->name('delete.socio');
 
+Route::post('/store/socio',[SocioController::class, 'store'])->name('store.socio');
+
 
 
 ////

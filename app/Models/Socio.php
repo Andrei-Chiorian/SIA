@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cargo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Socio extends Model
 {
@@ -25,5 +26,9 @@ class Socio extends Model
     public function persona()
     {
         return $this->belongsTo(Persona::class, 'CPer_Socios', 'Cod_Personas');
+    }
+
+    public function cargo(){
+        $this->belongsTo(Cargo::class,'Carg_Socios','Cod_Cargos');
     }
 } 

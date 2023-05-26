@@ -127,7 +127,7 @@
                     </div>
                     <div class="absolute right-44 2xl:ml-44">
                         <div>
-                            <img class="h-28" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
+                            <img class="h-28 w-28" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
                         </div>
                         <div class="mt-1">
                             <button id="fotoCamb" class="border rounded p-1 px-2 font-medium bg-gray-300 hover:bg-gray-400" @if(isset($persona)) hidden @endif>Cambiar foto</button>
@@ -188,11 +188,11 @@
                 <div class="p-3 pl-6 flex flex-col gap-y-3 shadow-inner bg-gray-100 rounded">
                     <p class="font-bold">DIRECCION</p>
                     <div class="flex gap-2">
-                        <div class="flex gap-16">
+                        <div class="flex gap-5">
                             <div class="flex flex-col gap-y-3">
                                 <label for="domicilio">Domicilio:</label>
                                 <label for="provincia">Provincia:</label>
-                                <label for="cpostal">Poblacion:</label>                        
+                                <label for="cpostal">C.Pos-Poblacion:</label>                        
                             </div>
                             
                             <div class="flex flex-col gap-y-2 items-end">
@@ -238,14 +238,14 @@
                                 <input type="date" name="falta" id="falta" class="w-32 border-2 rounded p-0 border-stone-500 text-right" value="@isset($persona){{$persona->FAlt_Personas}}@endisset{{old('falta')}}" @if(isset($persona)) disabled="true" @endif>
                             </div>
                             
-                            <div class="flex gap-56">
+                            <div class="flex gap-44">
                                 <label for="grupo-fam">Grupo Fam:</label>                    
-                                <select name="grupoFam" id="grupoFam" class="ml-1" @if(isset($persona)) disabled="true" @endif>
-                                    <option value="">seleccion 1</option>
-                                    <option value="">seleccion 2</option> 
-                                    <option value="">seleccion 3</option> 
-                                    <option value="">seleccion 4</option> 
-                                    <option value="">seleccion 5</option>     
+                                <select name="grupoFam" id="grupoFam" class="ml-3 w-36 border-2 rounded border-stone-500 text-center text-gray-700" @if(isset($persona)) disabled="true" @endif>
+                                    <option value="" disabled selected hidden>Elegir Grupo</option>
+                                    <option value="">Mañana infantil</option>
+                                    <option value="">Mañana adultos</option> 
+                                    <option value="">Tarde infantil</option> 
+                                    <option value="">Tarde adultos</option>                                     
                                 </select>                     
                             </div>
                         </div>
@@ -506,8 +506,8 @@
                         <textarea name="mdesc" id="mdesc" cols="5" rows="5" class="w-96 rounded" @if (isset($persona))disabled="true"     
                         @endif>@isset($persona){{$persona->MBaj_Personas}}@endisset{{old('mdesc')}}</textarea>   
                     </div>
-                    <div class="mt-2 ">
-                        <button class="border rounded p-1 px-2 shadow bg-gray-300 hover:bg-gray-400 font-medium" type="submit" name="nuevoUsu" id="nuevoUsu" @if (isset($persona))hidden      
+                    <div class="mt-2 self-center">
+                        <button class="border rounded p-1 px-2 shadow bg-blue-600 hover:bg-gray-700 text-white font-medium" type="submit" name="nuevoUsu" id="nuevoUsu" @if (isset($persona))hidden      
                         @endif>Crear Afiliado</button>
                     </div>    
                 </div>

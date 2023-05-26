@@ -9,7 +9,7 @@
 @endsection
         
 @section('contenido')
-        <div class=" h-screen p-3 pt-5 flex flex-col gap-y-1 bg-gray-300">
+        <div class=" h-screen p-3 pt-5 flex flex-col gap-y-1 bg-gray-300 rounded">
             <div class="text-2xl flex items-center justify-center font-bold text-gray-700">
                 Lista de Socios
             </div>
@@ -82,7 +82,7 @@
                     @csrf
                         <input type="text" class="w-10 bg-transparent cursor-pointer" name="cod" id="cod" value="{{$socio->Cod_Socios}}" hidden>                    
                     
-                        <button class="flex bg-gray-200 px-1 gap-3 w-full hover:border hover:bg-white hover:border-black" type="submit">
+                        <button class="flex bg-gray-200 px-1 gap-3 w-full hover:border-1 hover:bg-white hover:border-black" type="submit">
                             <div class="w-20 text-left text-blue-800 font-semibold">
                                 {{$socio->Cod_Socios}}
                             </div>
