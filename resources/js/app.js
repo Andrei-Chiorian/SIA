@@ -10,22 +10,12 @@ window.addEventListener('load', ini, false);
 
 document.getElementById('modificar').addEventListener('click',function e() {
     
-    enabDisab();
-    enablDisabPadres(); 
-    document.getElementById('afilForm').action = "http://localhost:8000/update/persona";
-    //document.getElementById('afilForm').append = "@method('DELETE')";
+    enabDisab();    
+    enablDisabPadres();
+    
+    document.getElementById('afilForm').action = "http://localhost:8000/update/persona";    
     document.getElementById('nuevoUsu').innerHTML = "Modificar afiliado";   
 });
-
-
-// document.getElementById('nuevo').addEventListener('click',function e() {
-//     enabDisab();
-//     enablDisabPadres(); 
-//     clearInp();
-//     document.getElementById('afilForm').action = "http://localhost:8000/store";
-//     document.getElementById('nuevoUsu').innerHTML = "Crear afiliado";   
-// });
-
 
 
 document.getElementById('nuevoUsu').addEventListener('click',function e() {
@@ -113,14 +103,14 @@ document.getElementById('closeMadre').addEventListener('click',function e() {
 
 
 //Metododo para activar/desactivar los inpunts
- function enabDisab() {
-    var apelInput = document.getElementById('apellidos');
+ function enabDisab() {    
        
-    if (apelInput.disabled == true) {
+    if (document.getElementById('apellidos').disabled == true) {
                 
         document.getElementById('apellidos').disabled = false;
         document.getElementById('nombre').disabled = false;
         document.getElementById('lopd').disabled = false;
+        document.getElementById('nFot').hidden = false;
         document.getElementById('fnaci').disabled = false;
         document.getElementById('dni').disabled = false;
         document.getElementById('telf').disabled = false;
@@ -135,16 +125,14 @@ document.getElementById('closeMadre').addEventListener('click',function e() {
         document.getElementById('desc').disabled = false;
         document.getElementById('fdesc').disabled = false;
         document.getElementById('mdesc').disabled = false;
-       
-        
-        
-        document.getElementById('fotoCamb').hidden = false;
+                       
         document.getElementById('nuevoUsu').hidden = false;
     }else{
         
         document.getElementById('apellidos').disabled = true;
         document.getElementById('nombre').disabled = true;
-        document.getElementById('lopd').disabled = true; 
+        document.getElementById('lopd').disabled = true;
+        document.getElementById('nFot').hidden = true; 
         document.getElementById('fnaci').disabled = true;
         document.getElementById('dni').disabled = true;
         document.getElementById('telf').disabled = true;
@@ -159,9 +147,7 @@ document.getElementById('closeMadre').addEventListener('click',function e() {
         document.getElementById('desc').disabled = true; 
         document.getElementById('fdesc').disabled = true;
         document.getElementById('mdesc').disabled = true;
-        
-        
-        document.getElementById('fotoCamb').hidden = true;
+                        
         document.getElementById('nuevoUsu').hidden = true;
 
     }     

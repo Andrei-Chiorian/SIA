@@ -137,14 +137,10 @@
                     </div>                                               
                 </div>
 
-                <div class="absolute right-44 2xl:ml-44">
+                <div class="absolute right-48 2xl:right-96">
                     <div>
-                        <img class="h-28 w-28" src=" @if(isset($socio)) {{$socio->persona->NFot_Personas ? asset('profile' . '/' . $socio->persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
-                    </div>
-                    <div class="mt-1">
-                        <button id="fotoCamb" class="border rounded p-1 px-2 font-medium bg-gray-300 hover:bg-gray-400" hidden>Cambiar foto</button>
-                    </div>      
-                    
+                        <img class="h-28 w-28 rounded-full" src=" @if(isset($socio)) {{$socio->persona->NFot_Personas ? asset('profile' . '/' . $socio->persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
+                    </div>              
                 </div>
             </div>
 
@@ -179,11 +175,11 @@
                                 <option value="">Sin Cargo</option>                                                                  
                             </select>                            
                             <select name="cCuo" id="cCuo" class="w-28 border-2 rounded border-stone-500 text-center text-gray-700" @if(isset($socio)) disabled="true" @endif>
-                                <option value="" disabled @if(!isset($socio)) selected @endif hidden>Elegir Cuota</option>
-                                <option value="1"  @isset($socio)@if(1 == $cargo->Cod_Cargos) selected @endif @endisset>Cuota 1 <img class="h-3" src="{{asset('profile/usuario.svg')}}" alt=""></option>
-                                <option value="2"  @isset($socio)@if(2 == $cargo->Cod_Cargos) selected @endif @endisset>Cuota 2</option> 
-                                <option value="3"  @isset($socio)@if(3 == $cargo->Cod_Cargos) selected @endif @endisset>Cuota 3</option> 
-                                <option value="0"  @isset($socio)@if(0 == $cargo->Cod_Cargos) selected @endif @endisset>Sin Cuota</option>                                                                  
+                                <option id="elegirCuota" value="" disabled @if(!isset($socio)) selected @endif hidden>Elegir Cuota</option>
+                                <option value="1"  @isset($socio)@if(1 == $socio->Cod_Cargos) selected @endif @endisset>Cuota 1</option>
+                                <option value="2"  @isset($socio)@if(2 == $socio->Cod_Cargos) selected @endif @endisset>Cuota 2</option> 
+                                <option value="3"  @isset($socio)@if(3 == $socio->Cod_Cargos) selected @endif @endisset>Cuota 3</option> 
+                                <option id="sinCuota" value="0"  @isset($socio)@if(0 == $socio->Cod_Cargos) selected @endif @endisset>Sin Cuota</option>                                                                  
                             </select>
                                                      
                         </div>
@@ -251,10 +247,18 @@
                 <label for="moti">Motivo:</label>   
                 <textarea name="moti" id="moti" cols="5" rows="5" class="w-96 rounded" @if(isset($socio)) disabled="true" @endif @if(isset($socio)) @endif>@isset($socio){{$socio->Moti_Socios}}@endisset{{old('provincia')}}</textarea>
                 
+                
                 <div class="mt-2 self-center">
-                    <button class="border rounded p-1 px-2 shadow bg-blue-600 hover:bg-gray-700 text-white font-medium" type="submit" name="nuevoSoci" id="nuevoSoci" @if (isset($persona))hidden @endif>
-                        Crear Socio
-                    </button>
+                    @if(!isset($socio))                    
+                        <button class="border rounded p-1 px-2 shadow bg-blue-600 hover:bg-gray-700 text-white font-medium" type="button" name="nuevoSoci" id="nuevoSoci">
+                            Crear Socio
+                        </button>
+                    @endif
+                    @isset($socio)
+                        <button class="border rounded p-1 px-2 shadow bg-blue-600 hover:bg-gray-700 text-white font-medium" type="button" name="modiSoci" id="modiSoci" hidden >
+                            Modificar Socio
+                        </button>
+                    @endisset
                 </div>
             </div>               
         </form>              
@@ -281,7 +285,7 @@
                                         <div class="w-14">{{$persona->Cod_Personas}}</div>
                                         <div id="nombPers{{$persona->Cod_Personas}}" class="w-52 text-left">{{$persona->Nomb_Personas}} {{$persona->Apel_Personas}}</div>
                                         <div class="self-end">
-                                            <img class="h-6 w-6" src="{{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}}" alt="Imagen Persona">
+                                            <img class="h-8 w-8 rounded-full" src="{{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}}" alt="Imagen Persona">
                                         </div>
                                     </div>
                                 </button>
@@ -315,7 +319,7 @@
                                     <div class="w-14">{{$club->Cod_Clubs}}</div>
                                     <div id="nombClub{{$club->Cod_Clubs}}" class="w-36 text-left">{{$club->Nomb_Clubs}}</div>
                                     <div class="self-end">
-                                        <img class="h-6 w-6" src="{{$club->Logo_Clubs ? asset('logo' . '/' . $club->Logo_Clubs) : asset('logo/logo.png')}}" alt="Imagen Persona">
+                                        <img class="h-8 w-8 rounded-full" src="{{$club->Logo_Clubs ? asset('logo' . '/' . $club->Logo_Clubs) : asset('logo/logo.png')}}" alt="Imagen Persona">
                                     </div>
                                 </div>
                             </button>

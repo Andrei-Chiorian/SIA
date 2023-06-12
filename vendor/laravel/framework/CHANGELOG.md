@@ -1,6 +1,167 @@
 # Release Notes for 10.x
 
-## [Unreleased](https://github.com/laravel/framework/compare/v10.8.0...10.x)
+## [Unreleased](https://github.com/laravel/framework/compare/v10.13.2...10.x)
+
+
+## [v10.13.2 (2023-06-05)](https://github.com/laravel/framework/compare/v10.13.1...v10.13.2)
+
+### Added
+- Added `Illuminate/Http/Client/PendingRequest::replaceHeaders()` ([#47335](https://github.com/laravel/framework/pull/47335))
+- Added `Illuminate/Notifications/Messages/MailMessage::attachMany()` ([#47345](https://github.com/laravel/framework/pull/47345))
+
+### Reverted
+- Revert "[10.x] Remove session on authenticatable deletion v2" ([#47354](https://github.com/laravel/framework/pull/47354))
+
+### Fixed
+- Fixes usage of Redis::many() with empty array ([#47307](https://github.com/laravel/framework/pull/47307))
+- Fix mapped renderable exception handling ([#47347](https://github.com/laravel/framework/pull/47347))
+- Avoid duplicates in fillable/guarded on merge in Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php ([#47351](https://github.com/laravel/framework/pull/47351))
+
+### Changed
+- Update Kernel::load() to use same classFromFile logic as events ([#47327](https://github.com/laravel/framework/pull/47327))
+- Remove redundant 'setAccessible' methods ([#47348](https://github.com/laravel/framework/pull/47348))
+
+
+## [v10.13.1 (2023-06-02)](https://github.com/laravel/framework/compare/v10.13.0...v10.13.1)
+
+### Added
+- Added `Illuminate\Contracts\Database\Query\ConditionExpression` interface and functional for this ([#47210](https://github.com/laravel/framework/pull/47210))
+- Added return type for `Illuminate/Notifications/Channels/MailChannel::send()` ([#47310](https://github.com/laravel/framework/pull/47310))
+
+### Reverted
+- Revert "[10.x] Fix inconsistentcy between report and render methods" ([#47326](https://github.com/laravel/framework/pull/47326))
+
+### Changed
+- Display queue runtime in human readable format ([#47227](https://github.com/laravel/framework/pull/47227))
+
+
+## [v10.13.0 (2023-05-30)](https://github.com/laravel/framework/compare/v10.12.0...v10.13.0)
+
+### Added
+- Added `Illuminate/Hashing/HashManager::isHashed()` ([#47197](https://github.com/laravel/framework/pull/47197))
+- Escaping functionality within the Grammar ([#46558](https://github.com/laravel/framework/pull/46558))
+- Provide testing hooks in `Illuminate/Support/Sleep.php` ([#47228](https://github.com/laravel/framework/pull/47228))
+- Added missing methods to AssertsStatusCodes ([#47277](https://github.com/laravel/framework/pull/47277))
+- Wrap response preparation in events ([#47229](https://github.com/laravel/framework/pull/47229))
+
+### Fixed
+- Fixed bug when function wrapped around definition of related factory ([#47168](https://github.com/laravel/framework/pull/47168))
+- Fixed inconsistentcy between report and render methods ([#47201](https://github.com/laravel/framework/pull/47201))
+- Fixes Model::isDirty() when AsCollection or AsEncryptedCollection have arguments ([#47235](https://github.com/laravel/framework/pull/47235))
+- Fixed escaped String for JSON_CONTAINS ([#47244](https://github.com/laravel/framework/pull/47244))
+- Fixes missing output on ProcessFailedException exception ([#47285](https://github.com/laravel/framework/pull/47285))
+
+### Changed
+- Remove useless else statements ([#47186](https://github.com/laravel/framework/pull/47186))
+- RedisStore improvement - don't open transaction unless all values are serialaizable ([#47193](https://github.com/laravel/framework/pull/47193))
+- Use carbon::now() to get current timestamp in takeUntilTimeout lazycollection-method ([#47200](https://github.com/laravel/framework/pull/47200))
+- Avoid duplicates in visible/hidden on merge ([#47264](https://github.com/laravel/framework/pull/47264))
+- Add a missing semicolon to CompilesClasses ([#47280](https://github.com/laravel/framework/pull/47280))
+- Send along value to InvalidPayloadException ([#47223](https://github.com/laravel/framework/pull/47223))
+
+
+## [v10.12.0 (2023-05-23)](https://github.com/laravel/framework/compare/v10.11.0...v10.12.0)
+
+### Added
+- Added `Illuminate/Queue/Events/JobTimedOut.php` ([#47068](https://github.com/laravel/framework/pull/47068))
+- Added `when()` and `unless()` methods to `Illuminate/Support/Sleep` ([#47114](https://github.com/laravel/framework/pull/47114))
+- Adds inline attachments support for markdown mailables ([#47140](https://github.com/laravel/framework/pull/47140))
+- Added `Illuminate/Testing/Concerns/AssertsStatusCodes::assertMethodNotAllowed()` ([#47169](https://github.com/laravel/framework/pull/47169))
+- Added `forceCreateQuietly` method ([#47162](https://github.com/laravel/framework/pull/47162))
+- Added parameters to timezone validation rule ([#47171](https://github.com/laravel/framework/pull/47171))
+
+### Fixed
+- Fixes singleton and api singletons creatable|destryoable|only|except combinations ([#47098](https://github.com/laravel/framework/pull/47098))
+- Don't use empty key or secret for DynamoDBClient ([#47144](https://github.com/laravel/framework/pull/47144))
+
+### Changed
+- Remove session on authenticatable deletion ([#47141](https://github.com/laravel/framework/pull/47141))
+- Added error handling and ensure re-enabling of foreign key constraints in `Illuminate/Database/Schema/Builder::withoutForeignKeyConstraints()` ([#47182](https://github.com/laravel/framework/pull/47182))
+
+### Refactoring
+- Remove useless else statements ([#47161](https://github.com/laravel/framework/pull/47161))
+
+
+## [v10.11.0 (2023-05-16)](https://github.com/laravel/framework/compare/v10.10.1...v10.11.0)
+
+### Added
+- Added the ability to extend the generic types for DatabaseNotificationCollection ([#47048](https://github.com/laravel/framework/pull/47048))
+- Added `/Illuminate/Support/Carbon::createFromId()` ([#47046](https://github.com/laravel/framework/pull/47046))
+- Added Name attributes on slots ([#47065](https://github.com/laravel/framework/pull/47065))
+- Added Precognition-Success header ([#47081](https://github.com/laravel/framework/pull/47081))
+- Added Macroable trait to Sleep class ([#47099](https://github.com/laravel/framework/pull/47099))
+
+### Fixed
+- Fixed `Illuminate/Database/Console/ShowModelCommand::getPolicy()` ([#47043](https://github.com/laravel/framework/pull/47043))
+
+### Changed
+- Remove return from channelRoutes method ([#47059](https://github.com/laravel/framework/pull/47059))
+- Bug in `Illuminate/Database/Migrations/Migrator::reset()` with string path ([#47047](https://github.com/laravel/framework/pull/47047))
+- Unify logic around cursor paginate ([#47094](https://github.com/laravel/framework/pull/47094))
+- Clears resolved instance of Vite when using withoutVite ([#47091](https://github.com/laravel/framework/pull/47091))
+- Remove workarounds for old Guzzle versions ([#47084](https://github.com/laravel/framework/pull/47084))
+
+
+## [v10.10.1 (2023-05-11)](https://github.com/laravel/framework/compare/v10.10.0...v10.10.1)
+
+### Added
+- Added `/Illuminate/Collections/Arr::mapWithKeys()` ([#47000](https://github.com/laravel/framework/pull/47000))
+- Added `dd` and `dump` methods to `Illuminate/Support/Carbon.php` ([#47002](https://github.com/laravel/framework/pull/47002))
+- Added `Illuminate/Queue/Failed/FileFailedJobProvider` ([#47007](https://github.com/laravel/framework/pull/47007))
+- Added arguments to the signed middleware to ignore properties ([#46987](https://github.com/laravel/framework/pull/46987))
+
+### Fixed
+- Added keys length check to prevent mget error in `Illuminate/Cache/RedisStore::many()` ([#46998](https://github.com/laravel/framework/pull/46998))
+- 'hashed' cast - do not rehash already hashed value ([#47029](https://github.com/laravel/framework/pull/47029))
+
+### Changed
+- Used `Carbon::now()` instead of `now()` ([#47017](https://github.com/laravel/framework/pull/47017))
+- Use file locks when writing failed jobs to disk ([b822d28](https://github.com/laravel/framework/commit/b822d2810d29ab1aedf667abc76ed969d28bbaf5))
+- Raise visibility of Mailable prepareMailableForDelivery() ([#47031](https://github.com/laravel/framework/pull/47031))
+
+
+## [v10.10.0 (2023-05-09)](https://github.com/laravel/framework/compare/v10.9.0...v10.10.0)
+
+### Added
+- Added `$isolated` and `isolatedExitCode` properties to `Illuminate/Console/Command` ([#46925](https://github.com/laravel/framework/pull/46925))
+- Added ability to restore/set Global Scopes ([#46922](https://github.com/laravel/framework/pull/46922))
+- Added `Illuminate/Collections/Arr::sortRecursiveDesc()` ([#46945](https://github.com/laravel/framework/pull/46945))
+- Added `Illuminate/Support/Sleep` ([#46904](https://github.com/laravel/framework/pull/46904), [#46963](https://github.com/laravel/framework/pull/46963))
+- Added `Illuminate/Database/Eloquent/Concerns/HasAttributes::castAttributeAsHashedString()` ([#46947]https://github.com/laravel/framework/pull/46947)
+- Added url support for mail config ([#46964](https://github.com/laravel/framework/pull/46964))
+
+### Fixed
+- Fixed replace missing_unless ([89ac58a](https://github.com/laravel/framework/commit/89ac58aa9b4fb7ef9f3b2290921488da1454ed30))
+- Gracefully handle invalid code points in e() ([#46914](https://github.com/laravel/framework/pull/46914))
+- HasCasts returning false instead of true ([#46992](https://github.com/laravel/framework/pull/46992))
+
+### Changed
+- Use method on UploadedFile to validate image dimensions ([#46912](https://github.com/laravel/framework/pull/46912))
+- Expose Js::json() helper ([#46935](https://github.com/laravel/framework/pull/46935))
+- Respect parents on middleware priority ([#46972](https://github.com/laravel/framework/pull/46972))
+- Do reconnect when redis throws connection lost error ([#46989](https://github.com/laravel/framework/pull/46989))
+- Throw timeoutException instead of maxAttemptsExceededException when a job times out ([#46968](https://github.com/laravel/framework/pull/46968))
+
+
+## [v10.9.0 (2023-04-25)](https://github.com/laravel/framework/compare/v10.8.0...v10.9.0)
+
+### Added
+- Add new HTTP status assertions ([#46841](https://github.com/laravel/framework/pull/46841))
+- Allow pruning all cancelled and unfinished queue batches ([#46833](https://github.com/laravel/framework/pull/46833))
+- Added `IGNITION_LOCAL_SITES_PATH` to `$passthroughVariables` in `ServeCommand.php` ([#46857](https://github.com/laravel/framework/pull/46857))
+- Added named static methods for middleware ([#46362](https://github.com/laravel/framework/pull/46362))
+
+### Fixed
+- Fix date_format rule throw ValueError ([#46824](https://github.com/laravel/framework/pull/46824))
+
+### Changed
+- Allow separate directory for locks on filestore ([#46811](https://github.com/laravel/framework/pull/46811))
+- Allow to whereMorphedTo work with null model ([#46821](https://github.com/laravel/framework/pull/46821))
+- Use pivot model fromDateTime instead of assuming Carbon in `Illuminate/Database/Eloquent/Relations/Concerns/InteractsWithPivotTable::addTimestampsToAttachment()` ([#46822](https://github.com/laravel/framework/pull/46822))
+- Make rules method in FormRequest optional ([#46846](https://github.com/laravel/framework/pull/46846))
+- Throw LogicException when calling FileFactory@image() if mimetype is not supported ([#46859](https://github.com/laravel/framework/pull/46859))
+- Improve job release method to accept date instance ([#46854](https://github.com/laravel/framework/pull/46854))
+- Use foreignUlid if model uses HasUlids trait when call foreignIdFor ([#46876](https://github.com/laravel/framework/pull/46876))
 
 
 ## [v10.8.0 (2023-04-18)](https://github.com/laravel/framework/compare/v10.7.1...v10.8.0)

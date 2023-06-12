@@ -66,7 +66,7 @@
                         <div class=" w-52">
                             Nombre
                         </div>
-                        <div class=" w-20">
+                        <div class=" w-28">
                             Cargo
                         </div>                        
                         <div class=" w-24">
@@ -95,8 +95,8 @@
                             <div class="w-52 text-left">
                                 {{$socio->persona->Nomb_Personas}} {{$socio->persona->Apel_Personas}}                       
                             </div>
-                            <div class="w-20 text-left">
-                                {{$socio->Carg_Socios}}
+                            <div class="w-28 text-left">
+                                {{$socio->cargo->Desc_Cargos}}
                             </div>                                              
                             <div class="w-24 text-left">
                                 {{$socio->FAlt_Socios}}

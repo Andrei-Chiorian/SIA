@@ -29,6 +29,6 @@ class Socio extends Model
     }
 
     public function cargo(){
-        $this->belongsTo(Cargo::class,'Carg_Socios','Cod_Cargos');
+        return $this->belongsTo(Cargo::class,'Carg_Socios','Cod_Cargos');
     }
 } 

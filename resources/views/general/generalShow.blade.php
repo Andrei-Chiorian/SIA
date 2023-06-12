@@ -79,7 +79,7 @@
                 @enderror                 
 
             </div>
-            <form id="afilForm" action="{{route('store')}}" method="post">
+            <form id="afilForm" action="{{route('store')}}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="relative flex p-3 pl-6 shadow-inner bg-gray-100 rounded">
 
@@ -125,14 +125,13 @@
                             </div> 
                         
                     </div>
-                    <div class="absolute right-44 2xl:ml-44">
+                    <div class="absolute right-48 2xl:right-96 flex flex-col items-center justify-center">
                         <div>
-                            <img class="h-28 w-28" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
+                            <img class="h-28 w-28 rounded-full" src=" @if(isset($persona)) {{$persona->NFot_Personas ? asset('profile' . '/' . $persona->NFot_Personas) : asset('profile/usuario.svg')}} @else {{asset('profile/usuario.svg')}} @endif " alt="Imagen Persona">
                         </div>
-                        <div class="mt-1">
-                            <button id="fotoCamb" class="border rounded p-1 px-2 font-medium bg-gray-300 hover:bg-gray-400" @if(isset($persona)) hidden @endif>Cambiar foto</button>
-                        </div>      
-                        
+                    </div>
+                    <div class="absolute right-24 top-32 2xl:right-72 mt-2 flex flex-col items-center justify-center">    
+                        <input type="file" name="nFot" id="nFot"  @if(isset($persona)) hidden @endif>                      
                     </div>
                 </div>
 
@@ -240,12 +239,12 @@
                             
                             <div class="flex gap-44">
                                 <label for="grupo-fam">Grupo Fam:</label>                    
-                                <select name="grupoFam" id="grupoFam" class="ml-3 w-36 border-2 rounded border-stone-500 text-center text-gray-700" @if(isset($persona)) disabled="true" @endif>
-                                    <option value="" disabled selected hidden>Elegir Grupo</option>
-                                    <option value="">Mañana infantil</option>
-                                    <option value="">Mañana adultos</option> 
-                                    <option value="">Tarde infantil</option> 
-                                    <option value="">Tarde adultos</option>                                     
+                                <select name="grupoFam" id="grupoFam" class="ml-3 w-36 border-2 rounded border-stone-500 text-center " @if(isset($persona)) disabled @endif>
+                                    <option value="" @if(!isset($persona)) selected @endif hidden>Elegir Grupo</option>
+                                    <option value="1" @isset($persona)@if(1 == $persona->CGru_Personas) selected @endif @endisset>Mañana infantil</option>
+                                    <option value="2" @isset($persona)@if(2 == $persona->CGru_Personas) selected @endif @endisset>Mañana adultos</option> 
+                                    <option value="3" @isset($persona)@if(3 == $persona->CGru_Personas) selected @endif @endisset>Tarde infantil</option> 
+                                    <option value="4" @isset($persona)@if(4 == $persona->CGru_Personas) selected @endif @endisset>Tarde adultos</option>                                     
                                 </select>                     
                             </div>
                         </div>

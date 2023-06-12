@@ -17,6 +17,6 @@ class Cargo extends Model
     ];
 
     public function socio(){
-        $this->hasMany(Socio::class, 'Carg_Socios');
+        $this->hasOne(Socio::class, 'Carg_Socios');
     }
 }

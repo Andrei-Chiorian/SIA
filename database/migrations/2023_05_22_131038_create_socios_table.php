@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('Cod_Socios');
             $table->foreignId('CClu_Socios')->references('Cod_Clubs')->on('clubs')->onDelete('cascade');
             $table->string('CCuo_Socios');
-            $table->string('SoFu_Socios');
+            $table->string('SoFu_Socios')->nullable();
             $table->string('FAlt_Socios');
             $table->string('Carg_Socios');
             $table->string('FBaj_Socios')->nullable();

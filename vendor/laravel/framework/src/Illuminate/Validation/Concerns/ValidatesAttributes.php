@@ -7,6 +7,7 @@ use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException as BrickMathException;
 use DateTime;
 use DateTimeInterface;
+use DateTimeZone;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
@@ -683,13 +684,21 @@ trait ValidatesAttributes
             return true;
         }
 
-        if (! $this->isValidFileInstance($value) || ! $sizeDetails = @getimagesize($value->getRealPath())) {
+        if (! $this->isValidFileInstance($value)) {
+            return false;
+        }
+
+        $dimensions = method_exists($value, 'dimensions')
+                ? $value->dimensions()
+                : @getimagesize($value->getRealPath());
+
+        if (! $dimensions) {
             return false;
         }
 
         $this->requireParameterCount(1, $parameters, 'dimensions');
 
-        [$width, $height] = $sizeDetails;
+        [$width, $height] = $dimensions;
 
         $parameters = $this->parseNamedParameters($parameters);
 
@@ -2277,11 +2286,15 @@ trait ValidatesAttributes
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     * @param  array<string, null|string>  $parameters
      * @return bool
      */
-    public function validateTimezone($attribute, $value)
+    public function validateTimezone($attribute, $value, $parameters = [])
     {
-        return in_array($value, timezone_identifiers_list(), true);
+        return in_array($value, timezone_identifiers_list(
+            constant(DateTimeZone::class.'::'.Str::upper($parameters[0] ?? 'ALL')),
+            isset($parameters[1]) ? Str::upper($parameters[1]) : null,
+        ), true);
     }
 
     /**

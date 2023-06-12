@@ -115,9 +115,9 @@
                             </div>
                             <div class="w-14 text-center">
                                 @if (now()->year - intval(substr($persona->FNac_Personas, 0,4)) >=18)
-                                    Si
+                                    No 
                                 @else
-                                    No    
+                                    Si  
                                 @endif
                             </div>                    
                             <div class="w-24">

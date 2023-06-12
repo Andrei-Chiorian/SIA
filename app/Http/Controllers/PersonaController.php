@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\Rules\Exists;
+use Intervention\Image\Facades\Image;
 
 class PersonaController extends Controller
 {
@@ -236,6 +236,20 @@ class PersonaController extends Controller
       }else{
          $madreInsert = null;
       }
+
+      //Verificamos que hay un campo nFot
+      if ($request->nFot) {
+         $image = $request->file('nFot');            
+        
+         $nomImage = Str::uuid() . "." . $image->extension();            
+         
+         $imgServ = Image::make($image);
+         $imgServ->fit(500,500,);           
+         $imgServ->orientate();
+
+         $imgPath = public_path('profile') . '/' . $nomImage;            
+         $imgServ->save($imgPath); 
+      }
       
       // Verificamos que el update se realiza sobre una persona comprobando el campo codigo del request en caso contrario no realizamos nada
       
@@ -245,7 +259,7 @@ class PersonaController extends Controller
          'Apel_Personas' =>  $request->apellidos,
          'Nomb_Personas' =>  $request->nombre,
          'FNac_Personas' =>  $request->fnaci,
-         'NFot_Personas' =>  $request->NFot_Personas,
+         'NFot_Personas' =>  $nomImage ?? null,
          'Dni_Personas'  =>  $request->dni,
          'Domi_Personas' =>  $request->domicilio,
          'CPos_Personas' =>  $request->cpostal,
@@ -257,7 +271,7 @@ class PersonaController extends Controller
          'CPad_Personas' =>  $padreInsert,
          'CMad_Personas' =>  $madreInsert,
          'FAlt_Personas' =>  $request->falta,
-         //'CGru_Personas' =>  $request->grupoFam,
+         'CGru_Personas' =>  $request->grupoFam,
          'Desc_Personas' =>  $request->desc,
          'FDes_Personas' =>  $request->fdesc,
          'MBaj_Personas' =>  $request->mdesc,
@@ -436,15 +450,33 @@ class PersonaController extends Controller
          $madreInsert = null;
       }
       
+      //Verificamos que hay un campo nFot
+      if ($request->nFot) {
+         $image = $request->file('nFot');            
+        
+         $nomImage = Str::uuid() . "." . $image->extension();            
+         
+         $imgServ = Image::make($image);
+         $imgServ->fit(500,500,);           
+         $imgServ->orientate();
+
+         $imgPath = public_path('profile') . '/' . $nomImage;            
+         $imgServ->save($imgPath); 
+      }
       // Verificamos que el update se realiza sobre una persona comprobando el campo codigo del request en caso contrario no realizamos nada
       if ($request->codigo) {
+
+         // Buscamos la persona por si no se ha acmbiado la imagen tener la antigua imagen
+         $persona = Persona::where('Cod_Personas', $request->codigo)->first();
+         
+
          Persona::where('Cod_Personas' , $request->codigo)->update([
             //'Hue1_Personas' =>  $request->Hue1_Personas,
             //'Obse_Personas' =>  $request->Obse_Personas,
             'Apel_Personas' =>  $request->apellidos,
             'Nomb_Personas' =>  $request->nombre,
             'FNac_Personas' =>  $request->fnaci,
-            'NFot_Personas' =>  $request->NFot_Personas,
+            'NFot_Personas' =>  $nomImage ?? $persona->NFot_Personas ?? null,
             'Dni_Personas'  =>  $request->dni,
             'Domi_Personas' =>  $request->domicilio,
             'CPos_Personas' =>  $request->cpostal,
@@ -456,29 +488,15 @@ class PersonaController extends Controller
             'CPad_Personas' =>  $padreInsert,
             'CMad_Personas' =>  $madreInsert,
             'FAlt_Personas' =>  $request->falta,
-            //'CGru_Personas' =>  $request->grupoFam,
+            'CGru_Personas' =>  $request->grupoFam,
             'Desc_Personas' =>  $request->desc,
             'FDes_Personas' =>  $request->fdesc,
             'MBaj_Personas' =>  $request->mdesc,
             'Lopd_Personas' =>  $request->lopd  
          ]);
-
-         //Al igual que con los padres verificamos que array no venga vacio y asginamos la variable persona al primer objeto del array
-         $persona = Persona::where('Cod_Personas', $request->codigo)->get();
-         $persona = $persona[0];
       }            
 
-      //Comprobamos que variables se han creado para redirigir a la funcion index con una o mas variables 
-      // if(isset($padre->Cod_Padres)){
-      //    if (isset($madre->Cod_Padres)) {
-      //       return redirect('show.persona')->with(['persona'=> $persona, 'padre' => $padre, 'madre' =>$madre]);
-      //    }
-      //    return redirect('show.persona')->with(['persona'=> $persona, 'padre' => $padre]);
-      // }    
-
-      // if ($request->codigo) {
-      //    return redirect('show.persona')->with('persona', $persona);
-      // }
+      
       $nom = $request->nombre . '-' . $request->apellidos;
       return redirect()->route('show',['cod'=>$request->codigo, 'nom'=>$nom]);
    }
