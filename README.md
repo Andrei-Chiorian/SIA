@@ -70,9 +70,9 @@ To get started with the project, follow these steps:
 ## Customization
 You can customize various aspects of the project:
 
-**UI Styling:** Modify the Tailwind CSS configurations in tailwind.config.js and styles in the resources/css directory.
-**Database Structure:** Adjust the migrations or models in the database/migrations and app/Models directories.
-**Routes and Controllers:** Customize the logic in routes/web.php and the corresponding controllers in app/Http/Controllers.
+- **UI Styling:** Modify the Tailwind CSS configurations in tailwind.config.js and styles in the resources/css directory.
+- **Database Structure:** Adjust the migrations or models in the database/migrations and app/Models directories.
+- **Routes and Controllers:** Customize the logic in routes/web.php and the corresponding controllers in app/Http/Controllers.
     
 ## Contributions
 Contributions are welcome! If you have suggestions or improvements, feel free to fork the repository and submit a pull request. Feedback and enhancements are highly appreciated.
