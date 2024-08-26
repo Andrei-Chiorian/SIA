@@ -34,16 +34,16 @@ To get started with the project, follow these steps:
 
 1. **Clone the repository:**
    
-   git clone https://github.com/Andrei-Chiorian/SIA.git
+       git clone https://github.com/Andrei-Chiorian/SIA.git
 
 2. **Navigate to the project directory:**
    
-   cd SIA
+       cd SIA
 
 3. **Install dependencies:**
    
-   composer install
-   npm install
+       composer install
+       npm install
 
 4. **Set up the environment:**
    
@@ -52,20 +52,20 @@ To get started with the project, follow these steps:
   
 5. **Generate an application key:**
   
-   php artisan key:generate
+       php artisan key:generate
    
 6. **Run database migrations:**
     
-   php artisan migrate
+       php artisan migrate
    
 7. **Start the development server:**
     
-    php artisan serve
-    npm run dev
+        php artisan serve
+        npm run dev
 
 8. **Open your browser and visit:**
  
-    http://localhost:8000
+        http://localhost:8000
 
 ## Customization
 You can customize various aspects of the project:
