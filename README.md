@@ -81,7 +81,7 @@ Contributions are welcome! If you have suggestions or improvements, feel free to
 This project is licensed under the MIT License.
 
 ## Contact
-Name: Andrei Chiorian
-Email: contacto@andreiwebdevelopment.es
-LinkedIn: https://www.linkedin.com/in/andrei-chiorian-web-development
-GitHub: https://github.com/Andrei-Chiorian
+- **Name:** Andrei Chiorian
+- **Email:** contacto@andreiwebdevelopment.es
+- **LinkedIn:** https://www.linkedin.com/in/andrei-chiorian-web-development
+- **GitHub:** https://github.com/Andrei-Chiorian
